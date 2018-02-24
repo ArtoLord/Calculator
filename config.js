@@ -1,20 +1,27 @@
 var sleep = require('system-sleep');
 const request = require('request-promise');
+const Koa = require('koa');
+const Router = require('koa-router');
+const Parser = require('koa-bodyparser');
+
+var app = new Koa();
+var router = new Router();
+
 var getTag = function(){
 	var teg = "536017237:AAHbHruD-ddmUtf60Krk-c1ksVGQ8bxhH8U";
 	return teg;
 }
 
-var http = require('http');
- 
-var port = 8443 ;
- 
-var s = http.createServer();
-s.on('request', function(request, response) {
-    conn(response);
+router.post('/bot',ctx=>{
+	console.log(ctx.request.body.message);
+	conn(ctx.request.body);
+	ctx.status=200;
 });
- 
-s.listen(port);
+var port = 443;
+var url = "https://mysterious-island-79267.herokuapp.com/bot";
+app.use(Parser());
+app.use(router.routes());
+app.listen(port,()=>{console.log("listening start")});
 	
 
 //});
@@ -36,29 +43,29 @@ var summ = function(text){
 
 
 var conn = function(response){
-		console.log(response.result[response.result.length - 1]);
-		if (typeof response.result[response.result.length - 1].message === 'undefined') {
-			var data = response.result[response.result.length - 1].callback_query.data;
-			message = response.result[response.result.length - 1].callback_query.message.text;
+		console.log(response);
+		if (typeof response.message === 'undefined') {
+			var data = response.callback_query.data;
+			message = response.callback_query.message.text;
 			
 			
 		if (data == "AC"){
-			edit(getTag(),response.result[response.result.length - 1].callback_query.message.message_id,response.result[response.result.length - 1].callback_query.message.chat.id,"0",keyboard);
+			edit(getTag(),response.callback_query.message.message_id,response.callback_query.message.chat.id,"0",keyboard);
 			return;
 		}	
 
 
 		if (data == "="){
-			edit(getTag(),response.result[response.result.length - 1].callback_query.message.message_id,response.result[response.result.length - 1].callback_query.message.chat.id,summ(message),keyboard);
+			edit(getTag(),response.callback_query.message.message_id,response.callback_query.message.chat.id,summ(message),keyboard);
 			return;
 		}
 		else{
 			
 					if(message=="0" && (data!="-" && data!="+" && data!="*" && data!="/" && data!="=" && data!=",")){
-						edit(getTag(),response.result[response.result.length - 1].callback_query.message.message_id,response.result[response.result.length - 1].callback_query.message.chat.id,data,keyboard);
+						edit(getTag(),response.callback_query.message.message_id,response.callback_query.message.chat.id,data,keyboard);
 						return;numb1 = response.result.update_id + 1;}
 					else{
-					edit(getTag(),response.result[response.result.length - 1].callback_query.message.message_id,response.result[response.result.length - 1].callback_query.message.chat.id,message+data,keyboard);
+					edit(getTag(),response.callback_query.message.message_id,response.callback_query.message.chat.id,message+data,keyboard);
 					return;}
 				}
 				
@@ -68,9 +75,9 @@ var conn = function(response){
 		
 	}
 	else{
-		if (response.result[response.result.length - 1].message.text == "/start"){
-			send(getTag(),response.result[response.result.length - 1].message.chat.id,"0",keyboard);
-			messages.push([response.result[response.result.length - 1].message.message_id,"0"]);
+		if (response.message.text == "/start"){
+			send(getTag(),response.message.chat.id,"0",keyboard);
+			return;
 		return;}
 	}
 
@@ -133,7 +140,7 @@ var options = {
 	json: true,
     uri: 'https://api.telegram.org/bot'+getTag()+'/setWebhook',
 	body:{
-		url:"https://mysterious-island-79267.herokuapp.com:80"
+		url:url
 	}
 }
 request(options)

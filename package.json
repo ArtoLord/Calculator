@@ -9,6 +9,9 @@
   "author": "ArtoLord",
   "license": "ISC",
   "dependencies": {
+    "koa": "^2.5.0",
+    "koa-bodyparser": "^4.2.0",
+    "koa-router": "^7.4.0",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "system-sleep": "^1.3.6"
