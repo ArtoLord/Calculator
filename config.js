@@ -17,7 +17,7 @@ router.post('/bot',ctx=>{
 	conn(ctx.request.body);
 	ctx.status=200;
 });
-var port = 443;
+var port = 3000;
 var url = "https://mysterious-island-79267.herokuapp.com/bot";
 app.use(Parser());
 app.use(router.routes());
