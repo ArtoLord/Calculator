@@ -7,7 +7,7 @@ var getTag = function(){
 
 var http = require('http');
  
-var port = 8081;
+var port = 80;
  
 var s = http.createServer();
 s.on('request', function(request, response) {
@@ -133,7 +133,7 @@ var options = {
 	json: true,
     uri: 'https://api.telegram.org/bot'+getTag()+'/setWebhook',
 	body:{
-		url:"https://mysterious-island-79267.herokuapp.com"
+		url:"https://mysterious-island-79267.herokuapp.com:80"
 	}
 }
 request(options)
