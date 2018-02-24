@@ -133,7 +133,7 @@ var options = {
 	json: true,
     uri: 'https://api.telegram.org/bot'+getTag()+'/setWebhook',
 	body:{
-		url:
+		url:"http://mysterious-island-79267.herokuapp.com"
 	}
 }
 request(options)
