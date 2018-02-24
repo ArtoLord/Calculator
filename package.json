@@ -1,0 +1,15 @@
+{
+  "name": "calkulator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "config.js",
+  "scripts": {
+    "start": "node config.js"
+  },
+  "author": "ArtoLord",
+  "license": "ISC",
+  "dependencies": {
+    "request-promise": "^4.2.2",
+    "system-sleep": "^1.3.6"
+  }
+}
