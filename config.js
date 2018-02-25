@@ -21,7 +21,7 @@ var port = 8443;
 var url = "https://mysterious-island-79267.herokuapp.com";
 app.use(Parser());
 app.use(router.routes());
-app..listen(process.env.PORT || port);
+app.listen(process.env.PORT || port);
 	
 
 //});
