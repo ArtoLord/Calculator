@@ -12,13 +12,13 @@ var getTag = function(){
 	return teg;
 }
 
-router.post('/bot',ctx=>{
+router.post('/',ctx=>{
 	console.log(ctx.request.body.message);
 	conn(ctx.request.body);
 	ctx.status=200;
 });
 var port = 8443;
-var url = "https://mysterious-island-79267.herokuapp.com/bot";
+var url = "https://mysterious-island-79267.herokuapp.com";
 app.use(Parser());
 app.use(router.routes());
 app.listen(port,()=>{console.log("listening start")});
